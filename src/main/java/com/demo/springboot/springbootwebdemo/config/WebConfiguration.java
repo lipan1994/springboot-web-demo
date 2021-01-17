@@ -1,6 +1,9 @@
 package com.demo.springboot.springbootwebdemo.config;
 
 import com.demo.springboot.springbootwebdemo.interceptors.LoginHandlerInterceptor;
+import org.springframework.boot.web.server.ConfigurableWebServerFactory;
+import org.springframework.boot.web.server.WebServerFactory;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
@@ -40,6 +43,20 @@ public class WebConfiguration implements WebMvcConfigurer{
     @Bean(name="localeResolver")
     public LocaleResolver i18nResolver(){
         return new I18nResolver();
+    }
+
+
+    @Bean
+    public WebServerFactoryCustomizer  webServerFactoryCustomizer(){
+
+        return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
+            @Override
+            public void customize(ConfigurableWebServerFactory factory) {
+                factory.setPort(9091);
+            }
+        };
+
+
     }
 
 }
