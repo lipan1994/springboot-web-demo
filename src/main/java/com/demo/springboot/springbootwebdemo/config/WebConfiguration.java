@@ -1,13 +1,20 @@
 package com.demo.springboot.springbootwebdemo.config;
 
 import com.demo.springboot.springbootwebdemo.interceptors.LoginHandlerInterceptor;
+import com.demo.springboot.springbootwebdemo.servlet.MyServlet;
 import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
+
+import javax.servlet.Servlet;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author: lipan
@@ -57,6 +64,17 @@ public class WebConfiguration implements WebMvcConfigurer{
         };
 
 
+
     }
+
+    @Bean
+    public ServletRegistrationBean myServlet(){
+
+        ServletRegistrationBean<Servlet> servletServletRegistrationBean = new ServletRegistrationBean<>();
+        servletServletRegistrationBean.setServlet(new MyServlet());
+        servletServletRegistrationBean.setUrlMappings( Arrays.asList("/MyServlet"));
+        return  servletServletRegistrationBean;
+    }
+
 
 }
