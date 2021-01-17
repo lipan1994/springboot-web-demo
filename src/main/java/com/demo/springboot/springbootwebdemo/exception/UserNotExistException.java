@@ -9,7 +9,7 @@ public class UserNotExistException extends RuntimeException {
 
     //
     public UserNotExistException() {
-        super();
+        super("用户不存在");
     }
 
 
